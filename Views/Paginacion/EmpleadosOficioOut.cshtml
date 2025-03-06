@@ -1,0 +1,84 @@
+﻿@model ModelEmpleadosOficio
+
+@{
+    int numregistros = 0;
+    int numPag = 1;
+    string oficio = "";
+    if (ViewBag.Numregistros != null)
+    {
+        numregistros = (int)ViewBag.Numregistros;
+        oficio = (string)ViewBag.Oficio;
+    }
+}
+
+
+
+<form method="post">
+    <div class="form-group">
+        <label for="oficio">Oficio</label>
+        <input type="text" class="form-control" id="oficio" name="oficio" />
+    </div>
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+
+
+<h1>Paginar emp oficios</h1>
+
+@if (Model != null){
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id)
+            </th>
+            <th>
+                Apellido)
+            </th>
+            <th>
+                Oficio)
+            </th>
+            <th>
+                Salario)
+            </th>
+            <th>
+                IdDepartamento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Empleados)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Oficio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdDepartamento)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<ul class="list-group list-group-horizontal">
+    @for (int i = 1; i <= numregistros; i += 2)
+    {
+        <li class="list-group-item">
+            <a class='btn btn-outline-primary' asp-action="EmpleadosOficioOut" asp-controller="Paginacion" asp-route-posicion="@i" asp-route-oficio="@oficio"> Página: @numPag </a>
+        </li>
+        numPag++;
+    }
+</ul>
+
+}

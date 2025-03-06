@@ -1,0 +1,65 @@
+﻿@model List<Empleado>
+
+@{
+    int numregistros = (int)ViewBag.Numregistros;
+    int numPag = 1;
+}
+
+<ul class="list-group list-group-horizontal">
+    @for (int i = 1; i <= numregistros; i += 3)
+    {
+        <li class="list-group-item">
+            <a class='btn btn-outline-primary' asp-action="PaginarGrupoEmp" asp-controller="Paginacion" asp-route-posicion="@i"> Página: @numPag </a>
+        </li>
+        numPag++;
+    }
+</ul>
+
+<h1>PaginarGrupoEmp</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id)
+            </th>
+            <th>
+                Apellido)
+            </th>
+            <th>
+                Oficio)
+            </th>
+            <th>
+                Salario)
+            </th>
+            <th>
+                IdDepartamento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Oficio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdDepartamento)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

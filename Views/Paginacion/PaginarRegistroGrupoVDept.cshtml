@@ -1,0 +1,48 @@
+﻿@model List<VistaDepartamento>
+
+<h1>PaginarRegistroGrupoVDept</h1>
+
+@* @Html.Raw(@ViewBag.Links) *@
+
+@{
+    int numregistros = (int)ViewBag.Numregistros;
+    int numPag = 1;
+}
+
+<ul class="list-group list-group-horizontal">
+@for (int i = 1; i <= numregistros; i +=2){
+    <li class="list-group-item">
+    <a class='btn btn-outline-primary' asp-action="PaginarRegistroGrupoVDept" asp-controller="Paginacion" asp-route-posicion="@i"> Página: @numPag </a>
+    </li>
+    numPag++;
+}
+</ul>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+               Nombre
+            </th>
+            <th>
+                Localidad
+            </th>
+            <th>
+                Posicion
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>@item.Posicion</td>
+                <td>@item.Id</td>
+                <td>@item.Nombre</td>
+                <td>@item.Localidad</td>
+        </tr>
+}
+    </tbody>
+</table>

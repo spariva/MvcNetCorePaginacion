@@ -1,0 +1,21 @@
+﻿@model VistaDepartamento
+
+<h2>Departamento @Model.Posicion de @ViewBag.Next</h2>
+
+<ul class="list-group list-group-horizontal">
+    <li class="list-group-item">
+        <a asp-action="PaginarRegistroVDept" asp-route-posicion="@ViewBag.Next">Primero</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-action="PaginarRegistroVDept" asp-route-posicion="@ViewBag.Prev">Anterior</a>
+    </li>
+</ul>
+<hr />
+<ul class="list-group ">
+    <li class="list-group-item-info">
+        @Model.Id
+    </li>
+    <li class="list-group-item-info">
+        @Model.Nombre
+    </li>
+</ul>
