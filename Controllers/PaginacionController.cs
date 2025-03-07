@@ -164,8 +164,7 @@ namespace MvcNetCorePaginacion.Controllers
 
             ModelEmpleadosOficio empleados = await this.repo.GetEmpleadosOficioOutAsync(posicion.Value, 3, oficio);
 
-            int numRegistros = await this.repo.GetEmpleadosOficioCountAsync(oficio);
-            ViewBag.Numregistros = numRegistros;
+            ViewBag.Numregistros = empleados.NumeroRegistros;
             ViewBag.Oficio = oficio;
 
             return View(empleados);
@@ -176,10 +175,9 @@ namespace MvcNetCorePaginacion.Controllers
         public async Task<IActionResult> EmpleadosOficioOut(string oficio)
         {
 
-            List<Empleado> empleados = await this.repo.GetEmpleadosOficioAsync(1, 3, oficio);
+            ModelEmpleadosOficio empleados = await this.repo.GetEmpleadosOficioOutAsync(1, 3, oficio);
 
-            int numRegistros = await this.repo.GetEmpleadosOficioCountAsync(oficio);
-            ViewBag.Numregistros = numRegistros;
+            ViewBag.Numregistros = empleados.NumeroRegistros;
             ViewBag.Oficio = oficio;
 
             return View(empleados);

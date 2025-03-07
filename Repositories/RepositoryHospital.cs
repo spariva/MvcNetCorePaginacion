@@ -3,8 +3,10 @@ using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
+using Microsoft.Win32;
 using MvcNetCorePaginacion.Data;
 using MvcNetCorePaginacion.Models;
+using System.Data;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 
@@ -59,16 +61,36 @@ namespace MvcNetCorePaginacion.Repositories
 
 
     /*almacenamos el número de registros del filtro, podrían ser varios.*/
-//    CREATE PROCEDURE SP_GRUPO_EMPS_OUT(@pos int, @jump int, @oficio nvarchar(50), @registros int out)
-//as
-//select @registros = count(EMP_NO) from EMP
-//SELECT EMP_NO, APELLIDO, OFICIO, SALARIO, DEPT_NO FROM
-//(SELECT ROW_NUMBER() OVER (ORDER BY APELLIDO) AS POSICION,
-//    EMP_NO, APELLIDO, OFICIO, SALARIO, DEPT_NO FROM EMP
+    //    CREATE PROCEDURE SP_GRUPO_EMPS_OUT(@pos int, @jump int, @oficio nvarchar(50), @registros int out)
+    //as
+    //select @registros = count(EMP_NO) from EMP
+    //SELECT EMP_NO, APELLIDO, OFICIO, SALARIO, DEPT_NO FROM
+    //(SELECT ROW_NUMBER() OVER (ORDER BY APELLIDO) AS POSICION,
+    //    EMP_NO, APELLIDO, OFICIO, SALARIO, DEPT_NO FROM EMP
 
-//    WHERE OFICIO = @oficio) QUERY
-//    WHERE POSICION >= @pos AND POSICION<(@pos + @jump)
-//GO
+    //    WHERE OFICIO = @oficio) QUERY
+    //    WHERE POSICION >= @pos AND POSICION<(@pos + @jump)
+    //GO
+
+
+
+    //practica
+    //create procedure SP_EMPLEADOS_DEPARTAMENTO_PAGINATION
+    //(@deptno int, @pos int, @nroRegistros int out)
+    //as
+    // select @nroRegistros = cast(COUNT(EMP_NO) as int)
+    //                           from EMP
+    //                           where DEPT_NO = @deptno
+
+
+    //    select EMP_NO, APELLIDO, OFICIO, SALARIO, DEPT_NO
+    //    from(
+    //        select cast(row_number() over (order by APELLIDO) as int) as POSICION, EMP_NO, APELLIDO, OFICIO, SALARIO, DEPT_NO
+    //        from EMP
+    //        where DEPT_NO = @deptno
+    // ) QUERY
+    //    where POSICION >= @pos and POSICION<(@pos + 1)
+    //go
     #endregion
 
     public class RepositoryHospital
@@ -190,6 +212,6 @@ namespace MvcNetCorePaginacion.Repositories
 
         }
 
-        
-    }
+
+        }
 }
